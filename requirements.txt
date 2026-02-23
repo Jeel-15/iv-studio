@@ -1,0 +1,8 @@
+flask==3.0.0
+flask-cors==4.0.0
+requests==2.31.0
+gunicorn==21.2.0
+python-dotenv==1.0.1
+langchain-openai==0.1.14
+langchain-core==0.1.51
+cloudinary==1.36.0

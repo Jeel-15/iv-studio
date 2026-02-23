@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV Studio - AI Video Generator CRM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">IV</div>
+            <div class="logo-text">
+                <span class="logo-title">IV Studio</span>
+                <span class="logo-subtitle">AI Video CRM</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-view="dashboard">
+                <span class="nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-view="projects">
+                <span class="nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                </span>
+                <span class="nav-text">Projects</span>
+            </a>
+            <a href="#" class="nav-item" data-view="create">
+                <span class="nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                </span>
+                <span class="nav-text">Create New</span>
+            </a>
+            <a href="#" class="nav-item" data-view="instaPost">
+                <span class="nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </span>
+                <span class="nav-text">Insta Post</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()" title="Logout from IV Studio">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+        <!-- Dashboard View -->
+        <section class="view-section active" id="dashboardView">
+            <div class="view-header">
+                <h1 class="view-title">Dashboard</h1>
+                <p class="view-subtitle">Overview of your AI video projects</p>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Videos</div>
+                        <div class="stat-value" id="totalVideos">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Insta Posts</div>
+                        <div class="stat-value" id="totalInstaPosts">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Custom Characters</div>
+                        <div class="stat-value" id="customCharacters">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Last Created</div>
+                        <div class="stat-value-sm" id="lastCreated">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Projects -->
+            <div class="section-header-inline">
+                <h2 class="section-title-sm">Recent Projects</h2>
+                <button class="btn-text" onclick="switchView('projects')">View All →</button>
+            </div>
+
+            <div class="projects-preview" id="recentProjects">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                    </div>
+                    <h3>No Projects Yet</h3>
+                    <p>Create your first AI video to get started</p>
+                    <button class="btn-primary" onclick="switchView('create')">Create Video</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects View -->
+        <section class="view-section" id="projectsView">
+            <div class="view-header">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div>
+                        <h1 class="view-title">All Projects</h1>
+                        <p class="view-subtitle">Browse and manage your video projects</p>
+                    </div>
+                    <button class="btn-primary" onclick="switchView('create')" style="white-space: nowrap;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                        Create New Project
+                    </button>
+                </div>
+            </div>
+
+            <div class="projects-list" id="projectsList">
+                <!-- Projects will be loaded here -->
+            </div>
+        </section>
+
+        <!-- View Project Section -->
+        <section class="view-section" id="viewProjectView">
+            <div class="view-header">
+                <div style="display: flex; align-items: center; gap: 16px; width: 100%;">
+                    <button class="btn-back" onclick="switchView('projects')" title="Back to Projects">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    </button>
+                    <div style="flex: 1;">
+                        <h1 class="view-title" id="viewProjectTitle">Project Details</h1>
+                        <p class="view-subtitle" id="viewProjectSubtitle">View your generated video</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Project Content -->
+            <div id="viewProjectContent">
+                <!-- Project details and results will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Instagram Post View -->
+        <section class="view-section" id="instaPostView">
+            <div class="view-header">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div>
+                        <h1 class="view-title">Instagram Posts</h1>
+                        <p class="view-subtitle">Manage your AI-generated Instagram posts</p>
+                    </div>
+                    <button class="btn-primary" onclick="switchView('createInstaPost')" style="white-space: nowrap;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                        Create New Post
+                    </button>
+                </div>
+            </div>
+
+            <div class="projects-list" id="instaPostsList">
+                <!-- Instagram posts will be loaded here -->
+            </div>
+        </section>
+
+        <!-- View Instagram Post Section -->
+        <section class="view-section" id="viewInstaPostView">
+            <div class="view-header">
+                <div style="display: flex; align-items: center; gap: 16px; width: 100%;">
+                    <button class="btn-back" onclick="switchView('instaPost')" title="Back to Posts">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    </button>
+                    <div style="flex: 1;">
+                        <h1 class="view-title" id="viewInstaPostTitle">Post Details</h1>
+                        <p class="view-subtitle" id="viewInstaPostSubtitle">View your generated Instagram post</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Post Content -->
+            <div id="viewInstaPostContent">
+                <!-- Post details will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Create Instagram Post View -->
+        <section class="view-section" id="createInstaPostView">
+            <div class="view-header">
+                <h1 class="view-title">Create Instagram Post</h1>
+                <p class="view-subtitle">Generate engaging Instagram posts with AI</p>
+            </div>
+
+            <div class="form-wrapper" style="position: relative;">
+                <form id="instaPostForm" class="video-form">
+                    <!-- Loading Overlay -->
+                    <div id="instaFormLoadingOverlay" style="display: none !important; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); border-radius: 12px; flex-direction: column; align-items: center; justify-content: center; z-index: 1000;">
+                        <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="animation: spin 2s linear infinite;">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="4"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-dasharray="62.8 251.2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <p style="color: var(--color-white); font-size: 18px; font-weight: 500;">Generating Prompt...</p>
+                        <p style="color: var(--color-grey); font-size: 14px; margin-top: 10px;">Please wait while AI creates your content</p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="instaKeyword" class="form-label">
+                                <span class="label-text">
+                                    <span class="label-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    </span>
+                                    Keyword
+                                    <span class="required">*</span>
+                                </span>
+                                <span class="label-hint">Enter the main keyword for your post</span>
+                            </label>
+                            <input type="text" id="instaKeyword" name="keyword" class="form-input" 
+                                placeholder="e.g., Web Developer"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="instaMode" class="form-label">
+                                <span class="label-text">
+                                    <span class="label-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    </span>
+                                    Post Mode
+                                    <span class="required">*</span>
+                                </span>
+                                <span class="label-hint">Select the type of post</span>
+                            </label>
+                            <select id="instaMode" name="mode" class="form-input" required onchange="toggleHiringFields()">
+                                <option value="">Select Mode</option>
+                                <option value="HIRING">Hiring</option>
+                                <option value="MARKETING">Marketing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Hiring Specific Fields -->
+                    <div id="hiringFieldsContainer" style="display: none;">
+                        <div class="form-row three-cols">
+                            <div class="form-group">
+                                <label for="instaPosition" class="form-label">
+                                    <span class="label-text">
+                                        <span class="label-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        </span>
+                                        Position
+                                        <span class="required hiring-required" style="display: none;">*</span>
+                                    </span>
+                                    <span class="label-hint">Job position or role</span>
+                                </label>
+                                <input type="text" id="instaPosition" name="position" class="form-input" 
+                                    placeholder="e.g., Senior Developer"
+                                    data-hiring-field="true">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instaExperience" class="form-label">
+                                    <span class="label-text">
+                                        <span class="label-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                                        </span>
+                                        Experience
+                                        <span class="required hiring-required" style="display: none;">*</span>
+                                    </span>
+                                    <span class="label-hint">Required experience level</span>
+                                </label>
+                                <input type="text" id="instaExperience" name="experience" class="form-input" 
+                                    placeholder="e.g., 3-5 years"
+                                    data-hiring-field="true">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instaLocation" class="form-label">
+                                    <span class="label-text">
+                                        <span class="label-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                        </span>
+                                        Location
+                                        <span class="required hiring-required" style="display: none;">*</span>
+                                    </span>
+                                    <span class="label-hint">Job location</span>
+                                </label>
+                                <input type="text" id="instaLocation" name="location" class="form-input" 
+                                    placeholder="e.g., Mehsana, Gujarat"
+                                    data-hiring-field="true">
+                            </div>
+                        </div>
+
+                        <div class="form-row two-cols">
+                            <div class="form-group">
+                                <label for="instaPost" class="form-label">
+                                    <span class="label-text">
+                                        <span class="label-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/></svg>
+                                        </span>
+                                        Number of Openings
+                                        <span class="required hiring-required" style="display: none;">*</span>
+                                    </span>
+                                    <span class="label-hint">Total positions available</span>
+                                </label>
+                                <input type="number" id="instaPost" name="post" class="form-input" 
+                                    placeholder="e.g., 5"
+                                    min="1"
+                                    data-hiring-field="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-cols">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="label-text">
+                                    <span class="label-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M20.4 14.5L16 10 4 20"/></svg>
+                                    </span>
+                                    Logo Image
+                                    <span class="optional">(Optional)</span>
+                                </span>
+                                <span class="label-hint">Upload your company logo or use the default IV Infotech logo</span>
+                            </label>
+                            <div class="upload-wrapper">
+                                <input type="file" id="instaLogo" name="logo" accept="image/*" class="file-input" hidden>
+                                <label for="instaLogo" class="upload-area" id="logoUploadArea">
+                                    <div class="upload-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                    </div>
+                                    <div class="upload-text">
+                                        <span class="upload-title">Upload Logo (Optional)</span>
+                                        <span class="upload-subtitle">PNG, JPG (Max 10MB)</span>
+                                    </div>
+                                </label>
+                                <div class="image-preview" id="logoPreview" style="display: none;">
+                                    <img id="logoPreviewImg" src="" alt="Logo Preview">
+                                    <button type="button" class="remove-image" id="removeLogo">✕</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="label-text">
+                                    <span class="label-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    </span>
+                                    Character Image
+                                    <span class="optional">(Optional)</span>
+                                </span>
+                                <span class="label-hint">Upload character image or use the default IV Infotech character</span>
+                            </label>
+                            <div class="upload-wrapper">
+                                <input type="file" id="instaCharacter" name="character" accept="image/*" class="file-input" hidden>
+                                <label for="instaCharacter" class="upload-area" id="characterUploadArea">
+                                    <div class="upload-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                    </div>
+                                    <div class="upload-text">
+                                        <span class="upload-title">Upload Character (Optional)</span>
+                                        <span class="upload-subtitle">PNG, JPG (Max 10MB)</span>
+                                    </div>
+                                </label>
+                                <div class="image-preview" id="characterPreview" style="display: none;">
+                                    <img id="characterPreviewImg" src="" alt="Character Preview">
+                                    <button type="button" class="remove-image" id="removeCharacter">✕</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="instaSubmitBtn">
+                            <span class="btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            </span>
+                            <span class="btn-text">Generate Post</span>
+                            <span class="btn-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Instagram Post Results -->
+                <div class="results-container" id="instaResults" style="display: none;">
+                    <div class="results-header">
+                        <h2 class="results-title">Generated Post Data</h2>
+                    </div>
+
+                    <div class="insta-result-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div class="result-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <h3 style="color: var(--color-white); margin-bottom: 10px; font-size: 16px;">Title</h3>
+                            <p id="resultTitle" style="color: var(--color-grey); font-size: 14px;"></p>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <h3 style="color: var(--color-white); margin-bottom: 10px; font-size: 16px;">Subtitle</h3>
+                            <p id="resultSubtitle" style="color: var(--color-grey); font-size: 14px;"></p>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <h3 style="color: var(--color-white); margin-bottom: 10px; font-size: 16px;">Concept</h3>
+                            <p id="resultConcept" style="color: var(--color-grey); font-size: 14px;"></p>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <h3 style="color: var(--color-white); margin-bottom: 10px; font-size: 16px;">Address Line</h3>
+                            <p id="resultAddress" style="color: var(--color-grey); font-size: 14px;"></p>
+                        </div>
+                        <!-- Hiring Specific Results -->
+                        <div class="result-card" style="background: rgba(255, 215, 0, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 215, 0, 0.2); display: none;" id="resultPositionCard">
+                            <h3 style="color: var(--color-primary); margin-bottom: 10px; font-size: 16px;">Position</h3>
+                            <p id="resultPosition" style="color: var(--color-grey); font-size: 14px;"></p>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 215, 0, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 215, 0, 0.2); display: none;" id="resultExperienceCard">
+                            <h3 style="color: var(--color-primary); margin-bottom: 10px; font-size: 16px;">Experience</h3>
+                            <p id="resultExperience" style="color: var(--color-grey); font-size: 14px;"></p>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 215, 0, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 215, 0, 0.2); display: none;" id="resultLocationCard">
+                            <h3 style="color: var(--color-primary); margin-bottom: 10px; font-size: 16px;">Location</h3>
+                            <p id="resultLocation" style="color: var(--color-grey); font-size: 14px;"></p>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <h3 style="color: var(--color-white); margin-bottom: 10px; font-size: 16px;">Primary Color</h3>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div id="primaryColorBox" style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);"></div>
+                                <p id="resultPrimaryHex" style="color: var(--color-grey); font-size: 14px;"></p>
+                            </div>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <h3 style="color: var(--color-white); margin-bottom: 10px; font-size: 16px;">Secondary Color</h3>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div id="secondaryColorBox" style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);"></div>
+                                <p id="resultSecondaryHex" style="color: var(--color-grey); font-size: 14px;"></p>
+                            </div>
+                        </div>
+                        <div class="result-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1); grid-column: 1 / -1;">
+                            <h3 style="color: var(--color-white); margin-bottom: 10px; font-size: 16px;">Final Prompt</h3>
+                            <p id="resultPrompt" style="color: var(--color-grey); font-size: 14px; line-height: 1.6; white-space: pre-wrap;"></p>
+                        </div>
+                    </div>
+
+                    <div class="results-actions" style="margin-top: 30px;">
+                        <button class="submit-btn" id="generateImageBtn" onclick="generateInstaImage()" style="background: linear-gradient(135deg, #FFD700, #FFC500); color: #1A1A1A;">
+                            <span class="btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M20.4 14.5L16 10 4 20"/></svg>
+                            </span>
+                            <span class="btn-text">Generate Banner Image</span>
+                            <span class="btn-arrow">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </button>
+                        <button class="btn-secondary" onclick="resetInstaForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                            <span>Create Another</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Create New Video View -->
+        <section class="view-section" id="createView">
+            <div class="view-header">
+                <h1 class="view-title">Create New Video</h1>
+                <p class="view-subtitle">Generate cinematic AI videos in minutes</p>
+            </div>
+
+            <!-- Input Form -->
+            <div class="form-wrapper" id="formWrapper">
+                <form id="videoForm" class="video-form">
+                    <div class="form-row">
+                        <!-- Video Title -->
+                        <div class="form-group full-width">
+                            <label for="videoTitle" class="form-label">
+                                <span class="label-text">
+                                    <span class="label-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                                    </span>
+                                    Video Title
+                                    <span class="required">*</span>
+                                </span>
+                                <span class="label-hint">Give your video a catchy title</span>
+                            </label>
+                            <input type="text" id="videoTitle" name="videoTitle" class="form-input" 
+                                placeholder="e.g., IV Infotech - Hiring Announcement 2026"
+                                required maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Video Description -->
+                        <div class="form-group full-width">
+                            <label for="videoDescription" class="form-label">
+                                <span class="label-text">
+                                    <span class="label-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                    </span>
+                                    Raw Video Description
+                                    <span class="required">*</span>
+                                </span>
+                                <span class="label-hint">Describe your video concept in detail</span>
+                            </label>
+                            <textarea id="videoDescription" name="videoDescription" class="form-textarea" rows="6"
+                                placeholder="Example: Create a hiring video for IV Infotech where our character stands outside the office..."
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-cols">
+                        <!-- Character Image Upload -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="label-text">
+                                    <span class="label-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    </span>
+                                    Character Image
+                                    <span class="optional">(Optional)</span>
+                                </span>
+                                <span class="label-hint">Upload a character image or use the default IV Infotech character</span>
+                            </label>
+                            <div class="upload-wrapper">
+                                <input type="file" id="characterImage" name="characterImage" accept="image/*"
+                                    class="file-input" hidden>
+                                <label for="characterImage" class="upload-area" id="uploadArea">
+                                    <div class="upload-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                    </div>
+                                    <div class="upload-text">
+                                        <span class="upload-title">Upload Image (Optional)</span>
+                                        <span class="upload-subtitle">PNG, JPG (Max 10MB)</span>
+                                    </div>
+                                </label>
+                                <div class="image-preview" id="imagePreview" style="display: none;">
+                                    <img id="previewImg" src="" alt="Character Preview">
+                                    <button type="button" class="remove-image" id="removeImage">✕</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Company Service Details -->
+                        <div class="form-group full-width">
+                            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                                <label for="companyService" class="form-label" style="margin-bottom: 0; flex: 1;">
+                                    <span class="label-text">
+                                        <span class="label-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                        </span>
+                                        Company Service Details
+                                    </span>
+                                    <span class="label-hint">Edit or use default IV Infotech details</span>
+                                </label>
+                                <button type="button" class="expand-btn" id="expandCompanyDetails" title="Expand to Fullscreen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                                </button>
+                            </div>
+                            <textarea id="companyService" name="companyService" class="form-textarea"
+                                rows="8"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            </span>
+                            <span class="btn-text">Generate AI Video</span>
+                            <span class="btn-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Loading Section -->
+            <div class="loading-wrapper" id="loadingWrapper" style="display: none;">
+                <div class="loading-container">
+                    <!-- Video Editor Interface -->
+                    <div class="editor-interface">
+                        <div class="editor-header">
+                            <div class="editor-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                                <span>IV Studio AI</span>
+                            </div>
+                            <div class="editor-status">
+                                <span class="status-dot"></span>
+                                <span id="editorStatus">Processing...</span>
+                            </div>
+                        </div>
+
+                        <!-- Video Preview Area -->
+                        <div class="editor-preview">
+                            <div class="preview-overlay">
+                                <div class="render-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                                </div>
+                                <div class="render-progress">
+                                    <div class="progress-percentage" id="progressPercentage">0%</div>
+                                    <div class="progress-status" id="progressStatus">Initializing AI Engine...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Editor -->
+                        <div class="editor-timeline">
+                            <div class="timeline-header">
+                                <div class="timeline-label">Timeline</div>
+                                <div class="timeline-time" id="timelineTime">00:00 / 00:30</div>
+                            </div>
+                            <div class="timeline-tracks">
+                                <div class="timeline-track">
+                                    <div class="track-label">Video</div>
+                                    <div class="track-content">
+                                        <div class="timeline-clip" id="videoClip" style="width: 0%">
+                                            <div class="clip-progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-track">
+                                    <div class="track-label">Audio</div>
+                                    <div class="track-content">
+                                        <div class="timeline-clip" id="audioClip" style="width: 0%">
+                                            <div class="clip-progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-track">
+                                    <div class="track-label">Effects</div>
+                                    <div class="track-content">
+                                        <div class="timeline-clip" id="effectsClip" style="width: 0%">
+                                            <div class="clip-progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="editor-progress">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="progressBar" style="width: 0%">
+                                    <div class="progress-shine"></div>
+                                </div>
+                            </div>
+                            <div class="progress-details">
+                                <span class="progress-label" id="progressLabel">Starting render...</span>
+                                <span class="progress-eta" id="progressETA">ETA: Calculating...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-wrapper" id="resultsWrapper" style="display: none;">
+                <div class="results-header">
+                    <h2 class="section-title-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px; stroke: var(--color-primary);"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg>
+                        Video Generated Successfully
+                    </h2>
+                    <button class="btn-text" onclick="createNewVideo()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        <span>Create Another Video</span>
+                    </button>
+                </div>
+
+                <div class="results-grid">
+                    <!-- Scene 1 -->
+                    <div class="scene-card">
+                        <div class="scene-header">
+                            <h3 class="scene-title">Scene 1</h3>
+                            <span class="scene-badge">Problem/Intro</span>
+                        </div>
+
+                        <div class="media-container">
+                            <div class="media-item">
+                                <div class="media-label">Image</div>
+                                <img id="scene1Img" src="" alt="Scene 1 Image" class="scene-image">
+                                <button class="view-btn" onclick="viewMedia('scene1Img', 'image')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <span>View Full</span>
+                                </button>
+                            </div>
+                            <div class="media-item">
+                                <div class="media-label">Video</div>
+                                <video id="scene1Vid" src="" class="scene-video" controls></video>
+                                <button class="view-btn" onclick="viewMedia('scene1Vid', 'video')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="2" y1="2" x2="22" y2="22"/><line x1="2" y1="22" x2="22" y2="2"/></svg>
+                                    <span>Full Screen</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="download-actions">
+                            <button class="download-btn" onclick="downloadMedia('scene1Img', 'scene1-image.png')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span>Image</span>
+                            </button>
+                            <button class="download-btn" onclick="downloadMedia('scene1Vid', 'scene1-video.mp4')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span>Video</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scene 2 -->
+                    <div class="scene-card">
+                        <div class="scene-header">
+                            <h3 class="scene-title">Scene 2</h3>
+                            <span class="scene-badge scene-badge-success">Solution/Growth</span>
+                        </div>
+
+                        <div class="media-container">
+                            <div class="media-item">
+                                <div class="media-label">Image</div>
+                                <img id="scene2Img" src="" alt="Scene 2 Image" class="scene-image">
+                                <button class="view-btn" onclick="viewMedia('scene2Img', 'image')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <span>View Full</span>
+                                </button>
+                            </div>
+                            <div class="media-item">
+                                <div class="media-label">Video</div>
+                                <video id="scene2Vid" src="" class="scene-video" controls></video>
+                                <button class="view-btn" onclick="viewMedia('scene2Vid', 'video')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="2" y1="2" x2="22" y2="22"/><line x1="2" y1="22" x2="22" y2="2"/></svg>
+                                    <span>Full Screen</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="download-actions">
+                            <button class="download-btn" onclick="downloadMedia('scene2Img', 'scene2-image.png')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span>Image</span>
+                            </button>
+                            <button class="download-btn" onclick="downloadMedia('scene2Vid', 'scene2-video.mp4')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span>Video</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn-secondary" onclick="switchView('projects')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>View All Projects</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Full View Modal -->
+    <div class="modal" id="fullViewModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal" style="display: none;">
+        <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 480px;">
+            <div style="text-align: center; padding: 40px 30px;">
+                <div style="width: 80px; height: 80px; margin: 0 auto 24px; background: rgba(239, 68, 68, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                    </svg>
+                </div>
+                <h2 id="deleteModalTitle" style="color: var(--color-white); font-size: 24px; margin-bottom: 12px; font-weight: 700;">Delete Project?</h2>
+                <p id="deleteModalMessage" style="color: var(--color-grey); font-size: 15px; line-height: 1.6; margin-bottom: 32px;">Are you sure you want to delete this project? This action cannot be undone and all project data will be permanently removed.</p>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button onclick="closeDeleteModal()" style="padding: 12px 24px; background: rgba(255, 255, 255, 0.1); color: var(--color-white); border: 2px solid var(--color-grey); border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 15px; transition: all 0.3s;">
+                        Cancel
+                    </button>
+                    <button id="deleteConfirmBtn" onclick="confirmDelete()" style="padding: 12px 24px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 15px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                        <span id="deleteConfirmBtnText">Delete Project</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=20260210"></script>
+</body>
+
+</html>
